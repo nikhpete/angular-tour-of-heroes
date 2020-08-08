@@ -4,14 +4,20 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
-import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
-import { HeroService } from './components/service/hero.service';
-import { from } from 'rxjs';
+import { HeroService } from './components/heroes/service/hero.service';
+import { HeroDetailComponent } from './components/heroes/hero-detail/hero-detail.component';
+import { MessageService } from './components/messages/service/message.service';
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
-  declarations: [AppComponent, HeroesComponent, HeroDetailComponent],
+  declarations: [
+    AppComponent,
+    HeroesComponent,
+    HeroDetailComponent,
+    MessagesComponent,
+  ],
   imports: [BrowserModule, FormsModule],
-  providers: [HeroService],
+  providers: [HeroService, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
