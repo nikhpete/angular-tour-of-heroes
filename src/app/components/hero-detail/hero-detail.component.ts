@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Hero } from '../hero';
+import { Hero } from '../../model/hero';
 import { from } from 'rxjs';
 
 @Component({
