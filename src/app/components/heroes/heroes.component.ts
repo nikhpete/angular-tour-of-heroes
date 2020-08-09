@@ -9,7 +9,6 @@ import { MessageService } from '../messages/service/message.service';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit {
-  selectedhero: Hero = { id: 0, name: '' };
   heroes: Hero[];
   constructor(private service: HeroService, private msgSvc: MessageService) {}
 
@@ -19,13 +18,5 @@ export class HeroesComponent implements OnInit {
 
   getHeroes(): void {
     this.service.getHeroes().subscribe((val) => (this.heroes = val));
-  }
-
-  onSelect(hero: Hero): void {
-    this.selectedhero = {
-      id: hero.id,
-      name: hero.name,
-    };
-    this.msgSvc.add(`HeroesComponent: Selected hero id=${hero.id}`);
   }
 }

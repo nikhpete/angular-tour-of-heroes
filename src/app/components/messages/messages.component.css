@@ -1,0 +1,7 @@
+button {
+  font-family: "Times New Roman";
+}
+button:hover {
+  cursor: pointer;
+  background-color: #cfd8dc;
+}
