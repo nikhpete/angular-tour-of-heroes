@@ -49,3 +49,12 @@
   margin-right: 0.8em;
   border-radius: 4px 0 0 4px;
 }
+
+button {
+  font-family: "Times New Roman";
+  margin-left: 1em;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #cfd8dc;
+}

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../../model/hero';
 import { HeroService } from './service/hero.service';
-import { MessageService } from '../messages/service/message.service';
 
 @Component({
   selector: 'app-heroes',
@@ -10,13 +9,22 @@ import { MessageService } from '../messages/service/message.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
-  constructor(private service: HeroService, private msgSvc: MessageService) {}
+  isNewHeroAdd: boolean = false;
+  constructor(private svc: HeroService) {}
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.service.getHeroes().subscribe((val) => (this.heroes = val));
+    this.svc.getHeroes().subscribe((val) => (this.heroes = val));
+  }
+
+  addHero(name: string): void {
+    if (!name) return;
+    this.svc.addHero({ name } as Hero).subscribe((hero) => {
+      this.heroes.push(hero);
+      this.isNewHeroAdd = false;
+    });
   }
 }

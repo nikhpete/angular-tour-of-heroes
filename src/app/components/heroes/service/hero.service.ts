@@ -8,7 +8,24 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable()
 export class HeroService {
   private heroesUrl = 'api/heroes';
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
   constructor(private http: HttpClient, private msgSvc: MessageService) {}
+
+  addHero(hero: Hero) {
+    return this.http.post(this.heroesUrl, hero, this.httpOptions).pipe(
+      tap((val: Hero) => this.log(`add hero ${val.id}`)),
+      catchError(this.handleError<any>('addHero'))
+    );
+  }
+
+  updateHero(hero: Hero) {
+    return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+      tap((_) => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
 
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
