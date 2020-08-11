@@ -6,5 +6,9 @@
     <input [(ngModel)]="hero.name" placeholder="name" />
     <button (click)="save()">Update</button>
   </div>
+  <div>
+    <label>Delete? :</label>
+    <button class="delete" (click)="deleteHero(hero)">Delete</button>
+  </div>
   <button (click)="goBack()">Go Back</button>
 </div>

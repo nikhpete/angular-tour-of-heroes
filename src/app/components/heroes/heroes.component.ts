@@ -8,23 +8,26 @@ import { HeroService } from './service/hero.service';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit {
-  heroes: Hero[];
   isNewHeroAdd: boolean = false;
   constructor(private svc: HeroService) {}
 
   ngOnInit(): void {
-    this.getHeroes();
+    this.fetchHeroes();
   }
 
-  getHeroes(): void {
-    this.svc.getHeroes().subscribe((val) => (this.heroes = val));
+  fetchHeroes(): void {
+    this.svc.fetchHeroes().subscribe((val) => this.svc.setHeroes(val));
   }
 
   addHero(name: string): void {
     if (!name) return;
     this.svc.addHero({ name } as Hero).subscribe((hero) => {
-      this.heroes.push(hero);
       this.isNewHeroAdd = false;
     });
+  }
+
+  deleteHero(hero: Hero) {
+    if (!hero) return;
+    this.svc.removeHero(hero).subscribe();
   }
 }

@@ -34,4 +34,9 @@ export class HeroDetailComponent implements OnInit {
   save(): void {
     this.svc.updateHero(this.hero).subscribe(() => this.goBack());
   }
+
+  deleteHero(hero: Hero) {
+    if (!hero) return;
+    this.svc.removeHero(hero).subscribe(() => this.goBack());
+  }
 }

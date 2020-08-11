@@ -29,3 +29,8 @@ button:disabled {
   color: #ccc;
   cursor: auto;
 }
+
+button.delete {
+  color: #fff;
+  background-color: red !important;
+}

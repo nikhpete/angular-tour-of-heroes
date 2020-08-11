@@ -9,14 +9,17 @@
     [class.selected]="hero.id === selectedhero.id"
     (click)="onSelect(hero)"
   > -->
-    <li *ngFor="let hero of heroes">
+    <li *ngFor="let hero of svc.getHeroes()">
       <a routerLink="/detail/{{ hero.id }}">
         <span class="badge">{{ hero.id }}</span>
         {{ hero.name }}
       </a>
+      <button class="delete" (click)="deleteHero(hero)">X</button>
     </li>
-    <button (click)="isNewHeroAdd = true">Add Hero</button>
   </ul>
+  <button (click)="isNewHeroAdd = true">
+    Add Hero
+  </button>
 </div>
 <div *ngIf="isNewHeroAdd">
   <label>Hero name: <input #heroName /></label>
