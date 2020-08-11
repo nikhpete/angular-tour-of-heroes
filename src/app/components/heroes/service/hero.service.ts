@@ -83,4 +83,18 @@ export class HeroService {
       return of(result as T);
     };
   }
+
+  public searcHeroes(term: string): Observable<Hero[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
+      tap((val) =>
+        val.length > 0
+          ? this.log(`fetched heroes with ${term}`)
+          : this.log('no result found')
+      ),
+      catchError(this.handleError<Hero[]>('searcHeroes'))
+    );
+  }
 }
