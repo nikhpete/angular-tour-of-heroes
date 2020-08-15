@@ -1,6 +1,7 @@
 /* AppComponent's private CSS styles */
 h1 {
   text-align: center;
+  color: rgb(0, 2, 0);
 }
 h2 {
   font-size: 2em;
