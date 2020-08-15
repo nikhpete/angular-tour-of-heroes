@@ -5,3 +5,6 @@ button:hover {
   cursor: pointer;
   background-color: #cfd8dc;
 }
+.message {
+  color: rgb(190, 243, 129);
+}
