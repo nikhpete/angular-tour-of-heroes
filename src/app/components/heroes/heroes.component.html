@@ -1,30 +1,37 @@
-<nav>
-  <a routerLink="/dashboard">Dashboard</a>
-</nav>
-<h2>Heroes</h2>
-<div *ngIf="!isNewHeroAdd">
-  <ul class="heroes">
-    <!-- <li
-    *ngFor="let hero of heroes"
-    [class.selected]="hero.id === selectedhero.id"
-    (click)="onSelect(hero)"
-  > -->
-    <li *ngFor="let hero of svc.getHeroes()">
-      <a routerLink="/detail/{{ hero.id }}">
-        <span class="badge">{{ hero.id }}</span>
-        {{ hero.name }}
-      </a>
-      <button class="delete" (click)="deleteHero(hero)">X</button>
-    </li>
-  </ul>
-  <button (click)="isNewHeroAdd = true">
-    Add Hero
-  </button>
+<div *ngIf="selectedhero.id == 0">
+  <nav>
+    <a routerLink="/dashboard">Dashboard</a>
+  </nav>
+  <h2>Heroes</h2>
+  <div *ngIf="!isNewHeroAdd">
+    <ul class="heroes">
+      <li
+        *ngFor="let hero of svc.getHeroes()"
+        [class.selected]="hero.id === selectedhero.id"
+      >
+        <div (click)="onSelect(hero)">
+          <span class="badge">{{ hero.id }}</span>
+          {{ hero.name }}
+        </div>
+        <button class="delete" (click)="deleteHero(hero)">X</button>
+      </li>
+    </ul>
+    <button (click)="isNewHeroAdd = true">
+      Add Hero
+    </button>
+  </div>
+  <div *ngIf="isNewHeroAdd">
+    <label>Hero name: <input #heroName /></label>
+    <button (click)="addHero(heroName.value); heroName.value = ''">
+      Add Hero
+    </button>
+    <button (click)="isNewHeroAdd = false">cancel</button>
+  </div>
 </div>
-<div *ngIf="isNewHeroAdd">
-  <label>Hero name: <input #heroName /></label>
-  <button (click)="addHero(heroName.value); heroName.value = ''">
-    Add Hero
-  </button>
-  <button (click)="isNewHeroAdd = false">cancel</button>
+<div *ngIf="selectedhero.id != 0">
+  <app-hero-detail
+    (unSelectHero)="unSelectHero($event)"
+    (deleteRequest)="deleteHero($event)"
+    [hero]="selectedhero"
+  ></app-hero-detail>
 </div>

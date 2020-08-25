@@ -9,6 +9,7 @@ import { HeroService } from './service/hero.service';
 })
 export class HeroesComponent implements OnInit {
   isNewHeroAdd: boolean = false;
+  selectedhero: Hero = { id: 0, name: '' };
   constructor(private svc: HeroService) {}
 
   ngOnInit(): void {
@@ -29,5 +30,13 @@ export class HeroesComponent implements OnInit {
   deleteHero(hero: Hero) {
     if (!hero) return;
     this.svc.removeHero(hero).subscribe();
+  }
+
+  onSelect(hero) {
+    this.selectedhero = hero;
+  }
+
+  unSelectHero(hero: Hero) {
+    this.selectedhero = hero;
   }
 }
